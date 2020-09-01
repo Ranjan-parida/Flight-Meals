@@ -1,0 +1,59 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/></edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZCODN_C_FLIGHT_MEAL_CDS" xml:lang="en" sap:schema-version="1">
+			<EntityType Name="SCARRType" sap:content-version="1">
+				<Key><PropertyRef Name="CARRID"/></Key><Property Name="CARRID" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Airline"/><Property Name="CARRNAME" Type="Edm.String" MaxLength="20" sap:label="Airline"/><Property Name="CURRCODE" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/><Property Name="URL" Type="Edm.String" MaxLength="255" sap:label="URL"/></EntityType>
+			<EntityType Name="SMEALType" sap:content-version="1">
+				<Key><PropertyRef Name="CARRID"/><PropertyRef Name="MEALNUMBER"/></Key><Property Name="CARRID" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Airline"/><Property Name="MEALNUMBER" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative"
+					sap:label="Inflight meal number"/><Property Name="MEALTYPE" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Type of dish/course"/></EntityType>
+			<EntityType Name="SPFLIType" sap:content-version="1">
+				<Key><PropertyRef Name="CARRID"/><PropertyRef Name="CONNID"/></Key><Property Name="CARRID" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Airline"/><Property Name="CONNID" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Connection Number"/><Property Name="COUNTRYFR" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country Key"/><Property Name="CITYFROM" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Depart. city"/><Property Name="AIRPFROM" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Departure airport"/><Property Name="COUNTRYTO" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country Key"/><Property Name="CITYTO" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Arrival city"/><Property Name="AIRPTO" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Destination airport"/><Property Name="FLTIME" Type="Edm.Int32" sap:label="Flight time"/><Property Name="DEPTIME" Type="Edm.Time" Precision="0" sap:label="Departure time"/><Property Name="ARRTIME" Type="Edm.Time" Precision="0" sap:label="Arrival Time"/><Property Name="DISTANCE" Type="Edm.Decimal" Precision="9" Scale="4" sap:unit="DISTID" sap:label="Distance"/><Property Name="DISTID" Type="Edm.String" MaxLength="3" sap:label="Distance in" sap:semantics="unit-of-measure"/><Property Name="FLTYPE" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Charter flt"/><Property Name="PERIOD" Type="Edm.Byte" sap:label="n day(s) later"/></EntityType>
+			<EntityType Name="Zcodn_C_flight_mealType" sap:label="Consumption view for cds - BOPF With Crud" sap:content-version="1">
+				<Key><PropertyRef Name="meal_id"/></Key><Property Name="meal_id" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Inflight meal number"
+					sap:quickinfo="Number of inflight meals"/><Property Name="carrid" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Airline" sap:quickinfo="Airline Code"/><Property Name="connid" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Connection Number"
+					sap:quickinfo="Flight Connection Number"/><Property Name="meal" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Inflight meal number"
+					sap:quickinfo="Number of inflight meals"/><Property Name="total_seats" Type="Edm.Int32" sap:label="Max. capacity econ." sap:quickinfo="Maximum capacity in economy class"/><Property Name="status" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Indicator" sap:quickinfo="General Flag"/><NavigationProperty Name="to_AirLine" Relationship="ZCODN_C_FLIGHT_MEAL_CDS.assoc_FE8AE68BBBBADA5C4F9084664B13EC4A"
+					FromRole="FromRole_assoc_FE8AE68BBBBADA5C4F9084664B13EC4A" ToRole="ToRole_assoc_FE8AE68BBBBADA5C4F9084664B13EC4A"/><NavigationProperty Name="to_Flight" Relationship="ZCODN_C_FLIGHT_MEAL_CDS.assoc_AB7B573EFC54172C8FEF38C847641D57"
+					FromRole="FromRole_assoc_AB7B573EFC54172C8FEF38C847641D57" ToRole="ToRole_assoc_AB7B573EFC54172C8FEF38C847641D57"/><NavigationProperty Name="to_Meals" Relationship="ZCODN_C_FLIGHT_MEAL_CDS.assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A"
+					FromRole="FromRole_assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A" ToRole="ToRole_assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A"/></EntityType>
+			<Association Name="assoc_AB7B573EFC54172C8FEF38C847641D57" sap:content-version="1"><End Type="ZCODN_C_FLIGHT_MEAL_CDS.Zcodn_C_flight_mealType" Multiplicity="1" Role="FromRole_assoc_AB7B573EFC54172C8FEF38C847641D57"/><End Type="ZCODN_C_FLIGHT_MEAL_CDS.SPFLIType" Multiplicity="0..1" Role="ToRole_assoc_AB7B573EFC54172C8FEF38C847641D57"/></Association>
+			<Association Name="assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A" sap:content-version="1"><End Type="ZCODN_C_FLIGHT_MEAL_CDS.Zcodn_C_flight_mealType" Multiplicity="1" Role="FromRole_assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A"/><End Type="ZCODN_C_FLIGHT_MEAL_CDS.SMEALType" Multiplicity="0..1" Role="ToRole_assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A"/></Association>
+			<Association Name="assoc_FE8AE68BBBBADA5C4F9084664B13EC4A" sap:content-version="1"><End Type="ZCODN_C_FLIGHT_MEAL_CDS.Zcodn_C_flight_mealType" Multiplicity="1" Role="FromRole_assoc_FE8AE68BBBBADA5C4F9084664B13EC4A"/><End Type="ZCODN_C_FLIGHT_MEAL_CDS.SCARRType" Multiplicity="0..1" Role="ToRole_assoc_FE8AE68BBBBADA5C4F9084664B13EC4A"/></Association>
+			<EntityContainer Name="ZCODN_C_FLIGHT_MEAL_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true"
+				sap:supported-formats="atom json xlsx"><EntitySet Name="SCARR" EntityType="ZCODN_C_FLIGHT_MEAL_CDS.SCARRType" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:content-version="1"/><EntitySet Name="SMEAL" EntityType="ZCODN_C_FLIGHT_MEAL_CDS.SMEALType" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:content-version="1"/><EntitySet Name="SPFLI" EntityType="ZCODN_C_FLIGHT_MEAL_CDS.SPFLIType" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:content-version="1"/><EntitySet Name="Zcodn_C_flight_meal" EntityType="ZCODN_C_FLIGHT_MEAL_CDS.Zcodn_C_flight_mealType" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+				<AssociationSet Name="assoc_FE8AE68BBBBADA5C4F9084664B13EC4A" Association="ZCODN_C_FLIGHT_MEAL_CDS.assoc_FE8AE68BBBBADA5C4F9084664B13EC4A"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Zcodn_C_flight_meal" Role="FromRole_assoc_FE8AE68BBBBADA5C4F9084664B13EC4A"/><End EntitySet="SCARR" Role="ToRole_assoc_FE8AE68BBBBADA5C4F9084664B13EC4A"/></AssociationSet>
+				<AssociationSet Name="assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A" Association="ZCODN_C_FLIGHT_MEAL_CDS.assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Zcodn_C_flight_meal" Role="FromRole_assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A"/><End EntitySet="SMEAL" Role="ToRole_assoc_D0BF23F5CEEF9AB77A0B6B7F046DC51A"/></AssociationSet>
+				<AssociationSet Name="assoc_AB7B573EFC54172C8FEF38C847641D57" Association="ZCODN_C_FLIGHT_MEAL_CDS.assoc_AB7B573EFC54172C8FEF38C847641D57"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Zcodn_C_flight_meal" Role="FromRole_assoc_AB7B573EFC54172C8FEF38C847641D57"/><End EntitySet="SPFLI" Role="ToRole_assoc_AB7B573EFC54172C8FEF38C847641D57"/></AssociationSet>
+			</EntityContainer>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZCODN_C_FLIGHT_MEAL_CDS.ZCODN_C_FLIGHT_MEAL_CDS_Entities">
+				<Annotation Term="Aggregation.ApplySupported">
+					<Record>
+						<PropertyValue Property="Transformations">
+							<Collection>
+								<String>aggregate</String>
+								<String>groupby</String>
+								<String>filter</String>
+							</Collection>
+						</PropertyValue><PropertyValue Property="Rollup" EnumMember="None"/></Record>
+				</Annotation>
+			</Annotations><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZCODN_C_FLIGHT_MEAL_CDS/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZCODN_C_FLIGHT_MEAL_CDS/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
